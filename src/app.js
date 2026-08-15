@@ -2,43 +2,20 @@ const express = require("express");
 
 const app = express();
 
-// case 1 sending response from 1st route handler
-// app.use(
-//   "/user",
-//   (req, res) => {
-//     console.log("Handling use route");
-//     res.send("Response 1");
-//   },
-//   (req, res) => {
-//     console.log("Handling user route 2");
-//     res.send("Response 2");
-//   }
-// );
-
-// // Case 2 not sending response from 1st route hander
-// app.use(
-//   "/user",
-//   (req, res) => {
-//     console.log("Handling use route");
-//   },
-//   (req, res) => {
-//     console.log("Handling user route 2");
-//     res.send("Response 2");
-//   }
-// );
-
-// Case 3 not sending response from 1st route hander but added next()
-app.use(
-  "/user",
-  (req, res, next) => {
-    console.log("Handling use route");
-    next();
-  },
-  (req, res) => {
-    console.log("Handling user route 2");
-    res.send("Response 2");
+// Problem why we need the middleware?? beacuse if there are 100 such api then we need to make a generic function which can work for all
+app.get("/admin/getAllData", (req, res) => {
+  // we need to authorizr but just image writing the below ogic for 100 apis in the same way uff!!!!!
+  const isAdminAuthorized = token === "xyz";
+  if (isAdminAuthorized) {
+    res.send("Hello from admin");
+  } else {
+    res.status(401).send("Unauthorized request");
   }
-);
+});
+app.get("/admin/delete", (req, res) => {
+  // we need to authorizr
+  res.send("Delete from admin");
+});
 app.listen(7777, () => {
   console.log("Server is successfully running");
 });
