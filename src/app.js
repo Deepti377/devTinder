@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-app.get("/user", (req, res) => {
+app.get(/\/ab?c/, (req, res) => {
   res.send({
     firstName: "Deepti",
     lastName: "Chauhan",
