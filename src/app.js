@@ -2,27 +2,43 @@ const express = require("express");
 
 const app = express();
 
-app.get(/\/ab?c/, (req, res) => {
-  res.send({
-    firstName: "Deepti",
-    lastName: "Chauhan",
-  });
-});
+// case 1 sending response from 1st route handler
+// app.use(
+//   "/user",
+//   (req, res) => {
+//     console.log("Handling use route");
+//     res.send("Response 1");
+//   },
+//   (req, res) => {
+//     console.log("Handling user route 2");
+//     res.send("Response 2");
+//   }
+// );
 
-app.post("/user", (req, res) => {
-  console.log("Save Data to database");
-  res.send("Data Successfully saved to database");
-});
-app.delete("/user", (req, res) => {
-  res.send("Deleted Successfully ");
-});
-app.use("/test", (req, res) => {
-  res.send("Hello from the server !!!");
-});
-app.use("/hello", (req, res) => {
-  res.send("Hello Hello Hello!!!");
-});
+// // Case 2 not sending response from 1st route hander
+// app.use(
+//   "/user",
+//   (req, res) => {
+//     console.log("Handling use route");
+//   },
+//   (req, res) => {
+//     console.log("Handling user route 2");
+//     res.send("Response 2");
+//   }
+// );
 
+// Case 3 not sending response from 1st route hander but added next()
+app.use(
+  "/user",
+  (req, res, next) => {
+    console.log("Handling use route");
+    next();
+  },
+  (req, res) => {
+    console.log("Handling user route 2");
+    res.send("Response 2");
+  }
+);
 app.listen(7777, () => {
   console.log("Server is successfully running");
 });
