@@ -2,17 +2,16 @@ const express = require("express");
 
 const app = express();
 
-// Problem why we need the middleware?? beacuse if there are 100 such api then we need to make a generic function which can work for all
+const { adminAuth } = require("./middlewares/auth");
+
+// generally we use app.use() for middlewares so we can use it for get/post/delete etc
+
+app.use("/admin", adminAuth);
+
 app.get("/admin/getAllData", (req, res) => {
-  // we need to authorizr but just image writing the below ogic for 100 apis in the same way uff!!!!!
-  const isAdminAuthorized = token === "xyz";
-  if (isAdminAuthorized) {
-    res.send("Hello from admin");
-  } else {
-    res.status(401).send("Unauthorized request");
-  }
+  res.send("Hello from admin get data");
 });
-app.get("/admin/delete", (req, res) => {
+app.get("/admin/deleteUser", (req, res) => {
   // we need to authorizr
   res.send("Delete from admin");
 });
