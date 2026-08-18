@@ -7,11 +7,4 @@ const connectDB = async () => {
   );
 };
 
-// connectDB()
-//   .then(() => {
-//     console.log("Database connection established...");
-//   })
-//   .catch(() => {
-//     console.error("Database connection established...");
-//   });
 module.exports = connectDB;
