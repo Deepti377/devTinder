@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -42,11 +41,15 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      validate(value) {
-        if (!["male", "female", "others"].includes(value)) {
-          throw new Error("Gender data is not valid");
-        }
+      enum: {
+        values: ["male", "female", "other"],
+        message: `{VALUE} is not a valid gender type`,
       },
+      // validate(value) {
+      //   if (!["male", "female", "others"].includes(value)) {
+      //     throw new Error("Gender data is not valid");
+      //   }
+      // },
     },
     photoUrl: {
       type: String,
@@ -70,10 +73,9 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// for modularity and clarification
 userSchema.methods.getJWT = async function () {
-  // this will get the jwt token for Deepti
   const user = this;
+
   const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
     expiresIn: "7d",
   });
