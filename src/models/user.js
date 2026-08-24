@@ -70,9 +70,10 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// for modularity and clarification
 userSchema.methods.getJWT = async function () {
+  // this will get the jwt token for Deepti
   const user = this;
-
   const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
     expiresIn: "7d",
   });
