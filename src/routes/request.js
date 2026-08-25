@@ -38,6 +38,7 @@ requestRouter.post(
           .send({ message: "Connection Request Already Exists!!" });
       }
 
+      // new instance of connectionRequest
       const connectionRequest = new ConnectionRequest({
         fromUserId,
         toUserId,
@@ -51,6 +52,7 @@ requestRouter.post(
           req.user.firstName + " is " + status + " in " + toUser.firstName,
         data,
       });
+      // error msg
     } catch (err) {
       res.status(400).send("ERROR: " + err.message);
     }
