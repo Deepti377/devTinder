@@ -25,7 +25,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   }
 });
 
-// api for fetching received connection request
+// api for fetching accepted connection request L-13 part 3
 userRouter.get("/user/connections", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
