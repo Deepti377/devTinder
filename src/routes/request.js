@@ -59,6 +59,7 @@ requestRouter.post(
   }
 );
 
+// once a connection request is sent then it will check whether the person accepts or rejects the request added in L-13 with all the chekcs in place
 requestRouter.post(
   "/request/review/:status/:requestId",
   userAuth,
