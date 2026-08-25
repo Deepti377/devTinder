@@ -15,7 +15,6 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
       toUserId: loggedInUser._id,
       status: "interested",
     }).populate("fromUserId", USER_SAFE_DATA);
-    // }).populate("fromUserId", ["firstName", "lastName"]);
 
     res.json({
       message: "Data fetched successfully",
@@ -26,6 +25,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   }
 });
 
+// api for fetching received connection request
 userRouter.get("/user/connections", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
